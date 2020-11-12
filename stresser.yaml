@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stresser-deployment
+  labels:
+    app: stresser
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: stresser
+  template:
+    metadata:
+      labels:
+        app: stresser
+    spec:
+      containers:
+      - name: stresser
+        image: modapp2020.azurecr.io/stresser:latest
+        args: ["--cpu", "10",  "--io", "10", "--vm", "2", "--vm-bytes", "512M", "--hdd", "2"]
