@@ -17,4 +17,4 @@ spec:
       containers:
       - name: stresser
         image: modapp2020.azurecr.io/stresser:latest
-        args: ["--cpu", "10",  "--io", "10", "--vm", "2", "--vm-bytes", "512M", "--hdd", "2"]
+        args: ["--cpu", "10",  "--io", "10", "--vm", "4", "--vm-bytes", "512M", "--hdd", "2"]
