@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "anbossarakscluster01-9ed8"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "anbossarakscluster01-9ed8"
+  template:
+    metadata:
+      labels:
+        app: "anbossarakscluster01-9ed8"
+    spec:
+      containers:
+        - name: "anbossarakscluster01-9ed8"
+          image: "anbosssarcr.azurecr.io/anbossarakscluster01"
+          ports:
+          - containerPort: 80
