@@ -5,7 +5,7 @@ metadata:
   labels:
     app: stresser
 spec:
-  replicas: 10
+  replicas: 0
   selector:
     matchLabels:
       app: stresser
@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: stresser
-        image: modapp2020.azurecr.io/stresser:latest
+        image: anbossar.azurecr.io/stresser:latest
         args: ["--cpu", "10",  "--io", "10", "--vm", "4", "--vm-bytes", "512M", "--hdd", "2"]
