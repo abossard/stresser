@@ -1,3 +1,27 @@
+# cluster upgrades
+az aks get-upgrades --resource-group anbossar-aks-ws --name anbossaraksagw --output table
+az aks upgrade \
+    --resource-group anbossar-aks-ws \
+    --name anbossaraksagw \
+    --kubernetes-version KUBERNETES_VERSION \
+    --control-plane-only
+# node pool upgrades
+az aks nodepool get-upgrades --nodepool-name nodepool1 --cluster-name anbossaraksagw --resource-group anbossar-aks-ws
+az aks nodepool show --resource-group anbossar-aks-ws --cluster-name anbossaraksagw --name nodepool1 --query nodeImageVersion
+
+az aks upgrade \
+    --resource-group anbossar-aks- \
+    --name anbossaraksagw \
+    --node-image-only
+
+# install kured
+helm repo add kured https://weaveworks.github.io/kured
+helm repo update
+kubectl create namespace kured
+helm install kured kured/kured --namespace kured --set nodeSelector."kubernetes\.io/os"=linux
+
+# deploy stress
 az acr build --registry anbossar --image stresser:latest .
 kubectl apply -f stresser.yaml
 az aks update -n anbossaraksagw -g anbossar-aks-ws --attach-acr anbossar
+
